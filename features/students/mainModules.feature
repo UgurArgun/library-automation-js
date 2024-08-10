@@ -1,4 +1,3 @@
-@lib-05
 Feature: Main modules of the application
 
     As a student, I want to access to the main modules of the app.

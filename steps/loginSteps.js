@@ -3,7 +3,6 @@ import { expect } from "@playwright/test";
 import { BrowserUtility } from "../utilities/BrowserUtility.js";
 import { PageManager } from "../globalPagesSetup.js";
 
-
 Given("user is already on the login page", async function () {
   //await pageManager.loginPage.page.goto(pageManager.loginPage.librarayUrl);
   PageManager.page.goto(PageManager.loginPage.librarayUrl);
@@ -40,6 +39,23 @@ When("user clicks the login button", async function () {
 Then("user login succussfully to the homepage", async function () {
   // verify the title is Library
   await expect(PageManager.page).toHaveTitle("Library");
-  
+
   // await BrowserUtility.sleep(2);
+});
+
+When("user enters invalid username {string}", async function (string) {
+  await PageManager.loginPage.enterUsername(string);
+});
+
+When("user enters invalid password {string}", async function (string) {
+  await PageManager.loginPage.enterPassword(string);
+});
+Then("user is not able to login to the homepage", async function () {});
+//await expect(PageManager.page).toHaveTitle("Login-Library");
+
+Then("user should see a {string} error pop-up", async function (string) {
+  // verify error message
+  await expect(PageManager.loginPage.alertMessage).toHaveText(string);
+  await BrowserUtility.verifyMessages(PageManager.loginPage.alertMessage.innerText, string);
+  await BrowserUtility.sleep(2);
 });
