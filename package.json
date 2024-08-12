@@ -5,7 +5,7 @@
   "scripts": {
     "test": "npx cucumber-js",
 
-    "test:tag": "npx cucumber-js --tags @lib01",
+    "test:tag": "npx cucumber-js --tags @lib02",
 
     "Mac-open:report": "open test-reports/cucumber-report.html",
     "Windows-open:report": "start test-reports/cucumber-report.html"
