@@ -9,8 +9,8 @@ Feature: Login to the application
 
   Background:
     Given user is already on the login page
-
-  #TODO: Verify users are able to log in with valid credentials 
+  @lib01-01
+  #TODO: Verify users are able to log in with valid credentials
   Scenario Outline: Verify users can login with valid credentials
     When user enters valid username '<user-type>'
     And user enters valid password '<password>'
@@ -21,9 +21,9 @@ Feature: Login to the application
       | admin     |
       | student   |
 
-@lib01
+  @lib01-02
   # TODO: Verify users cannot login with invalid credentials
-   Scenario Outline: Verify users cannot login with invalid credentials
+  Scenario Outline: Verify users cannot login with invalid credentials
     When user enters invalid username '<invalid-username>'
     And user enters invalid password '<invalid-password>'
     And user clicks the login button
@@ -34,8 +34,8 @@ Feature: Login to the application
       | library@student  | password123      |
       | library@cydeo    | library password |
 
-
-# TODO: Verify users cannot login with invalid credentials
+  @lib01-03
+  # TODO: Verify users cannot login with invalid credentials
   Scenario Outline: Verify users cannot login with valid username and invalid password
     When user enters valid username '<-user-type>'
     And user enters invalid password '<invalid-password>'
@@ -47,18 +47,7 @@ Feature: Login to the application
       | admin     | a1b2c3           |
       | student   |                  |
       | student   | a1b2c3           |
-
-
-  # TODO: Verify users are not allowed to login without any credentials
-  Scenario Outline: Verify users cannot login without username and password
-    When user does not enter username '<user-type>'
-    And user does not enter password '<password>'
-    And user clicks the login button
-    Then user is not able to login to the homepage
-    Examples:
-      | user-type |
-      | admin     |
-      | student   |
+      |           |                  |
 #? Should there be more scenarios for this user story? Feel free to add more scenarios.
 
 

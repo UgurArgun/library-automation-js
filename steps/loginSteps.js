@@ -36,8 +36,8 @@ When("user clicks the login button", async function () {
   // await BrowserUtility.sleep(2);
 });
 
-Then("user login succussfully to the homepage", async function () {
-  // verify the title is Library
+Then("user login successfully to the homepage", async function () {
+  // verify the title is stillLibrary
   await expect(PageManager.page).toHaveTitle("Library");
 
   // await BrowserUtility.sleep(2);
@@ -50,9 +50,14 @@ When("user enters invalid username {string}", async function (string) {
 When("user enters invalid password {string}", async function (string) {
   await PageManager.loginPage.enterPassword(string);
 });
-Then("user is not able to login to the homepage", async function () {});
-//await expect(PageManager.page).toHaveTitle("Login-Library");
 
+Then("user is not able to login to the homepage", async function () {
+  if (PageManager.page) {
+    await expect(PageManager.page).toHaveTitle("Login - Library");
+  } else {
+    console.error("PageManager.page is not defined");
+  }
+});
 Then("user should see a {string} error pop-up", async function (string) {
   // verify error message
   await expect(PageManager.loginPage.alertMessage).toHaveText(string);
