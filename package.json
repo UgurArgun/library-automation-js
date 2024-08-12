@@ -4,11 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "npx cucumber-js",
-<<<<<<< Updated upstream
+
     "test:tag": "npx cucumber-js --tags @lib01",
-=======
-    "test:tag": "npx cucumber-js --tags @lib01-03",
->>>>>>> Stashed changes
+
     "Mac-open:report": "open test-reports/cucumber-report.html",
     "Windows-open:report": "start test-reports/cucumber-report.html"
   },
