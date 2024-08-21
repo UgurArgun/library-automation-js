@@ -10,5 +10,6 @@ export class DashboardPage extends BasePage {
     super(page);
     this.userProfileImage = page.locator("//img[@id='user_avatar']");
     this.logoutButton = page.getByText("Log out");
+    this.bookLink = page.locator("//span[@class='title' and text()='Books']");
   }
 }
