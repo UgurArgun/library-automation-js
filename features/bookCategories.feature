@@ -24,6 +24,65 @@ Feature: Book Categories
             | student   |
 
     # TODO: verify that all 21 book categories are displayed under the Book Categories dropdown
+    @lib-03-02
+    Scenario Outline: Verify that user sees 21 book categories for admin
+        And user is already logged in as "<user-type>"
+        When user clicks Books link
+        And user clicks the book categories drop down box
+        Then book category name "<category>" should be included in the categories
+        Examples:
+            | user-type | category                |
+            | admin     | ALL                     |
+            | admin     | Action and Adventure    |
+            | admin     | Anthology               |
+            | admin     | Classic                 |
+            | admin     | Comic and Graphic Novel |
+            | admin     | Crime and Detective     |
+            | admin     | Drama                   |
+            | admin     | Fable                   |
+            | admin     | Fairy Tale              |
+            | admin     | Fan-Fiction             |
+            | admin     | Fantasy                 |
+            | admin     | Historical Fiction      |
+            | admin     | Horror                  |
+            | admin     | Science Fiction         |
+            | admin     | Biography/Autobiography |
+            | admin     | Humor                   |
+            | admin     | Romance                 |
+            | admin     | Short Story             |
+            | admin     | Essay                   |
+            | admin     | Memoir                  |
+            | admin     | Poetry                  |
+            | student     | ALL              |
+            | student     | Action and Adventure    |
+            | student     | Anthology               |
+            | student     | Classic                 |
+            | student     | Comic and Graphic Novel |
+            | student     | Crime and Detective     |
+            | student     | Drama                   |
+            | student     | Fable                   |
+            | student     | Fairy Tale              |
+            | student     | Fan-Fiction             |
+            | student     | Fantasy                 |
+            | student     | Historical Fiction      |
+            | student     | Horror                  |
+            | student     | Science Fiction         |
+            | student     | Biography/Autobiography |
+            | student     | Humor                   |
+            | student     | Romance                 |
+            | student     | Short Story             |
+            | student     | Essay                   |
+            | student     | Memoir                  |
+            | student     | Poetry                  |
+
+
+
+
+
+
+
+
+
 
     Scenario Outline: Verify users are able to select record numbers for seeing the filter their favorite books
         When user clicks to number dropdown of the show records
