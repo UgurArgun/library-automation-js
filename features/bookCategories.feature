@@ -11,12 +11,19 @@ Feature: Book Categories
     # TODO: verify users see 21 book categories
     Background:
         Given user is already on the login page
-        And user logs in to the home page
-        And user navigates to the "Books" page
+    @lib-03-01
+    # TODO: verify users see 21 book categories
+    Scenario Outline: Verify that user sees 21 book categories for admin
+        And user is already logged in as "<user-type>"
+        When user clicks Books link
+        And user clicks the book categories drop down box
+        Then user should see 21 book categories
+        Examples:
+            | user-type |
+            | admin     |
+            | student   |
 
-    Scenario: Verify users are able to see 21 book categories and filter their favorite books
-        When user clicks to book categories dropdown menu
-        Then it shows that there are "21" book categories
+    # TODO: verify that all 21 book categories are displayed under the Book Categories dropdown
 
     Scenario Outline: Verify users are able to select record numbers for seeing the filter their favorite books
         When user clicks to number dropdown of the show records
