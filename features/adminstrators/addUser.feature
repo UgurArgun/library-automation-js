@@ -2,7 +2,6 @@ Feature: Add Users Functionality
 
     As an admin, I should be able to add users on the "Users" page.
 
-    #! Acceptance Criteria are missing :(
     #* AC1: Admins should be able to navigate to Users page, open the Add User popup and add a new user.
     #* AC2: users should see a "The email address already exists on the system. " message if any users try to add an existing user email.
     #* AC3: users should see a “This field is required.” warning message when they attempt to add user without any text in Full Name field.
@@ -19,7 +18,7 @@ Feature: Add Users Functionality
     Scenario: Verify users can navigates to the Users page and all the fields are enabled
         When user navigates to "Users" page
         And user clicks the Add user button
-        Then user is able to see Add User popup
+        Then user is able to see Add User popup and it's enabled
         And all the field are enabled in the Add User popup
 
     Scenario: Verify users can see a “This field is required.” warning message when they attempt to add user without any text in Full Name field.
@@ -29,7 +28,7 @@ Feature: Add Users Functionality
         And user tries to save without a text in the fullname input
         Then user can see a “This field is required.” warning message 
 
-        Scenario: Verify users can save with valid firstname and surname
+        Scenario: Verify admin can add a user 
         When user navigates to "Users" page
         And user clicks the Add user button
         And user tries to save with firstname and surname in the fullname input

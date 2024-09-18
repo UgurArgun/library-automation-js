@@ -5,9 +5,10 @@
   "scripts": {
     "test": "npx cucumber-js",
 
-    "test:tag": "npx cucumber-js --tags @lib02",
+    "test:tag": "npx cucumber-js --tags @lib-03-02",
 
     "Mac-open:report": "open test-reports/cucumber-report.html",
+    
     "Windows-open:report": "start test-reports/cucumber-report.html"
   },
   "keywords": [],
