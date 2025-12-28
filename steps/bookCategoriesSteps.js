@@ -15,7 +15,7 @@ When('user clicks the book categories drop down box', async function () {
 
 Then('user should see {int} book categories', async function (int) {
     const totalOptions = await PageManager.booksPage.bookCategoriesDropdown.locator("option").count();
-    console.log(totalOptions.toString());
+    console.log("Total book categories: " + totalOptions);
     expect(totalOptions).toBe(int);
 });
 

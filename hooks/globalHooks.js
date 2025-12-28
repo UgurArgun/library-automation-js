@@ -144,8 +144,17 @@ class CustomWorld {
    * and prevents memory leaks.
    */
   async close() {
-    await this.page.close();
-    await this.browser.close();
+    const safeClose = async (closeFn, timeoutMs = 5000) => {
+      if (!closeFn) return;
+      await Promise.race([
+        closeFn().catch(() => {}),
+        new Promise((resolve) => setTimeout(resolve, timeoutMs)),
+      ]);
+    };
+
+    await safeClose(this.page?.close?.bind(this.page));
+    await safeClose(this.context?.close?.bind(this.context));
+    await safeClose(this.browser?.close?.bind(this.browser));
   }
 }
 
