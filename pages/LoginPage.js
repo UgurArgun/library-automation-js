@@ -13,7 +13,7 @@ export class LoginPage extends BasePage {
     this.loginButton = page.locator(
       "//button[text()='Sign in' and @type='submit']"
     );
-    
+    this.alertMessage = page.locator("//div[@class='alert alert-danger']")  
   }
 
   /**
@@ -53,5 +53,18 @@ export class LoginPage extends BasePage {
    */
   async clickLoginButton() {
     await this.loginButton.click();
+  }
+  async login(user_type) {
+    if(user_type == "student") {
+      await this.enterUsername();
+      await this.enterPassword();
+      await this.clickLoginButton();
+    } else if (user_type == "admin") {
+      await this.enterUsername(this.adminUsername);
+      await this.enterPassword(this.adminPassword);
+      await this.clickLoginButton();
+    }else{
+      throw new Error("Invalid user type. Please provide 'student' or 'admin'.");
+}
   }
 }

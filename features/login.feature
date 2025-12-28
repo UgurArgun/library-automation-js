@@ -1,4 +1,4 @@
-@lib-01
+@login
 Feature: Login to the application
   As a user, I want to login so that I can access the app's main features.
 
@@ -9,24 +9,45 @@ Feature: Login to the application
 
   Background:
     Given user is already on the login page
-
+  @lib01-01
+  #TODO: Verify users are able to log in with valid credentials
   Scenario Outline: Verify users can login with valid credentials
     When user enters valid username '<user-type>'
-    And user enters valid password '<user-type>'
+    And user enters valid password '<password>'
     And user clicks the login button
-    Then user login succussfully to the homepage
+    Then user login successfully to the homepage
     Examples:
       | user-type |
       | admin     |
-      | studen    |
+      | student   |
 
+  @lib01-02
+  # TODO: Verify users cannot login with invalid credentials
+  Scenario Outline: Verify users cannot login with invalid credentials
+    When user enters invalid username '<invalid-username>'
+    And user enters invalid password '<invalid-password>'
+    And user clicks the login button
+    Then user is not able to login to the homepage
+    And user should see a "Sorry, Wrong Email or Password" error pop-up
+    Examples:
+      | invalid-username | invalid-password |
+      | library@student  | password123      |
+      | library@cydeo    | library password |
 
-# TODO: Verify users can not login with invalid credentials
-
-
-# TODO: Verify users are not allowed to login without any credentials
-
-
-    #? Should there be more scenarios for this user story? Feel free to add more scenarios.
+  @lib01-03
+  # TODO: Verify users cannot login with invalid credentials
+  Scenario Outline: Verify users cannot login with valid username and invalid password
+    When user enters valid username '<-user-type>'
+    And user enters invalid password '<invalid-password>'
+    And user clicks the login button
+    Then user is not able to login to the homepage
+    Examples:
+      | user-type | invalid-password |
+      | admin     |                  |
+      | admin     | a1b2c3           |
+      | student   |                  |
+      | student   | a1b2c3           |
+      |           |                  |
+#? Should there be more scenarios for this user story? Feel free to add more scenarios.
 
 
