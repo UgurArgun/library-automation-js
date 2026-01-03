@@ -52,51 +52,54 @@ Feature: Book Categories
             | admin     | Essay                   |
             | admin     | Memoir                  |
             | admin     | Poetry                  |
-            | student     | ALL              |
-            | student     | Action and Adventure    |
-            | student     | Anthology               |
-            | student     | Classic                 |
-            | student     | Comic and Graphic Novel |
-            | student     | Crime and Detective     |
-            | student     | Drama                   |
-            | student     | Fable                   |
-            | student     | Fairy Tale              |
-            | student     | Fan-Fiction             |
-            | student     | Fantasy                 |
-            | student     | Historical Fiction      |
-            | student     | Horror                  |
-            | student     | Science Fiction         |
-            | student     | Biography/Autobiography |
-            | student     | Humor                   |
-            | student     | Romance                 |
-            | student     | Short Story             |
-            | student     | Essay                   |
-            | student     | Memoir                  |
-            | student     | Poetry                  |
-
-
-
-
-
-
-
-
-
-
+            | student   | ALL                     |
+            | student   | Action and Adventure    |
+            | student   | Anthology               |
+            | student   | Classic                 |
+            | student   | Comic and Graphic Novel |
+            | student   | Crime and Detective     |
+            | student   | Drama                   |
+            | student   | Fable                   |
+            | student   | Fairy Tale              |
+            | student   | Fan-Fiction             |
+            | student   | Fantasy                 |
+            | student   | Historical Fiction      |
+            | student   | Horror                  |
+            | student   | Science Fiction         |
+            | student   | Biography/Autobiography |
+            | student   | Humor                   |
+            | student   | Romance                 |
+            | student   | Short Story             |
+            | student   | Essay                   |
+            | student   | Memoir                  |
+            | student   | Poetry                  |
+          
+    # TODO: Verify users are able to select record numbers for seeing the filter their favorite books
+    @lib-03-03
     Scenario Outline: Verify users are able to select record numbers for seeing the filter their favorite books
-        When user clicks to number dropdown of the show records
-        And selects the "<record number>"
-        Then it shows that there are "record number"
-        And it displays the filtered book numbers correctly
-
+        And user is already logged in as "<user-type>"
+        When user clicks Books link
+        And user clicks to number dropdown of the show records
+        When user selects the "<record number>"
+        Then it shows that there are "<record number>"
+        And it displays the filtered book numbers correctly for "<record number>"
         Examples:
-            | record number |
-            | 10            |
-            | 15            |
-            | 50            |
-            | 100           |
-            | 200           |
-            | 500           |
+            | user-type | record number |
+            | admin     | 5             |
+            | admin     | 10            |
+            | admin     | 15            |
+            | admin     | 50            |
+            | admin     | 100           |
+            | admin     | 200           |
+            | admin     | 500           |
+            | student   | 5             |
+            | student   | 10            |
+            | student   | 15            |
+            | student   | 50            |
+            | student   | 100           |
+            | student   | 200           |
+            | student   | 500           |
+
 
     # TODO: Verify users are able to filter their favorite books
     Scenario Outline: Verify users are able to filter their favorite books
@@ -181,3 +184,4 @@ Feature: Book Categories
 
 
 #? Should there be more scenarios for this user story? Feel free to add more scenarios.
+        
