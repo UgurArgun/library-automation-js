@@ -3,6 +3,7 @@ import { BooksPage } from "./pages/BooksPage.js";
 import { BorrowingBooksPage } from "./pages/BorrowingBooksPage.js";
 import { DashboardPage } from "./pages/DashboardPage.js";
 import { UsersPage } from "./pages/UsersPage.js";
+
 // Import OTHER CLASSES HERE...
 
 /** @typedef {import('./pages/LoginPage.js').LoginPage} LoginPage */
@@ -10,6 +11,8 @@ import { UsersPage } from "./pages/UsersPage.js";
 /** @typedef {import('./pages/BorrowingBooksPage.js').BorrowingBooksPage} BorrowingBooksPage */
 /** @typedef {import('./pages/DashboardPage.js').DashboardPage} DashboardPage */
 /** @typedef {import('./pages/UsersPage.js').UsersPage} UsersPage */
+
+// ADD YOUR OWN TYPEDEF IMPORTS HERE...
 // ADD YOUR OWN TYPEDEFS HERE...
 export class PageManager {
 
