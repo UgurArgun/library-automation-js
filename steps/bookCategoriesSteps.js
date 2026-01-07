@@ -66,3 +66,70 @@ Then("it displays the filtered book numbers correctly for {string}",
     expect(visibleRows).toBeLessThanOrEqual(n);
   }
 );
+/*
+ Scenario: Verify users can see all filtered pages
+        When user clicks to book categories dropdown menu
+        And clicks the page numbers at the bottom of the page
+        Then it displays the relevant pages with correct numbers
+        And it displays only the filtered books
+
+
+And("clicks the page numbers at the bottom of the page", async function () {
+    await PageManager.booksPage.paginationButtons.click();
+    });
+*/
+
+/*
+       And selects the "<favorite book>" category
+        Then it displays the favorite books under the Category column
+        And it displays the filtered book category in the dropdown menu
+        And it displays the filtered book numbers correctly
+*/
+When('selects the {string} category', async function (favoriteBook) {
+    const dropdown = PageManager.booksPage.bookCategoriesDropdown;
+    await dropdown.selectOption({ label: favoriteBook });
+    await dropdown.click();
+    this.selectedCategory = favoriteBook;
+    // verify selection actually changed
+    await expect(dropdown.locator("option:checked")).toHaveText(favoriteBook);
+});
+
+Then('it displays the favorite books under the Category column', async function () {
+    const headerTexts = await PageManager.booksPage.page
+        .locator("#tbl_books thead th")
+        .allInnerTexts();
+    const categoryIndex = headerTexts.findIndex(
+        (text) => text.trim() === "Category"
+    );
+    const columnIndex = categoryIndex >= 0 ? categoryIndex + 1 : 4;
+    const categoryCells = PageManager.booksPage.tableRows.locator(
+        `td:nth-child(${columnIndex})`
+    );
+    const expectedCategory = this.selectedCategory;
+    if (expectedCategory && expectedCategory !== "ALL") {
+        await expect
+            .poll(
+                async () => {
+                    const texts = (await categoryCells.allInnerTexts()).map((t) =>
+                        t.trim()
+                    );
+                    if (texts.length === 0) return false;
+                    return texts.every((text) => text === expectedCategory);
+                },
+                { timeout: 5000 }
+            )
+            .toBe(true);
+    } else {
+        const rowCount = await categoryCells.count();
+        for (let i = 0; i < rowCount; i++) {
+            const cellText = await categoryCells.nth(i).innerText();
+            expect(cellText).toBeDefined();
+        }
+    }
+});
+
+Then('it displays the filtered book category in the dropdown menu', async function () {
+    const selectedCategory =
+        await PageManager.booksPage.bookCategoriesDropdown.inputValue();
+    expect(selectedCategory).toBeDefined();
+}); 

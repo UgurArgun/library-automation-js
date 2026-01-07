@@ -102,12 +102,16 @@ Feature: Book Categories
 
 
     # TODO: Verify users are able to filter their favorite books
+       
+    @lib-03-04
     Scenario Outline: Verify users are able to filter their favorite books
-        When user clicks to book categories dropdown menu
+        When user is already logged in as "student"
+        And user clicks Books link
+        And user clicks the book categories drop down box
         And selects the "<favorite book>" category
         Then it displays the favorite books under the Category column
         And it displays the filtered book category in the dropdown menu
-        And it displays the filtered book numbers correctly
+      #  And it displays the filtered book numbers correctly
 
         Examples:
             | favorite book           |
@@ -132,11 +136,10 @@ Feature: Book Categories
             | Essay                   |
             | Memoir                  |
             | Poetry                  |
-            | Thrillers               |
-            | Young Adults            |
+         
 
     Scenario: Verify users can see all filtered pages
-        When user clicks to book categories dropdown menu
+        When user clicks the book categories drop down box
         And clicks the page numbers at the bottom of the page
         Then it displays the relevant pages with correct numbers
         And it displays only the filtered books

@@ -8,7 +8,7 @@ const HEIGHT = 1080; // Default screen height
 const DEFAULT_TIMEOUT = 30000; // default timeout in milliseconds
 
 const browserSetup = {
-  headless: false,
+  headless: true,
   //slowMo: 1000,
 };
 
