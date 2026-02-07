@@ -111,7 +111,7 @@ Feature: Book Categories
         And selects the "<favorite book>" category
         Then it displays the favorite books under the Category column
         And it displays the filtered book category in the dropdown menu
-      #  And it displays the filtered book numbers correctly
+        And it displays the filtered book numbers correctly
 
         Examples:
             | favorite book           |

@@ -133,3 +133,28 @@ Then('it displays the filtered book category in the dropdown menu', async functi
         await PageManager.booksPage.bookCategoriesDropdown.inputValue();
     expect(selectedCategory).toBeDefined();
 }); 
+
+Then('it displays the filtered book numbers correctly', async function () {
+    const info = PageManager.booksPage.page.locator("#tbl_books_info");
+    await expect(info).toBeVisible();
+    const infoText = (await info.innerText()).trim();
+    const match = infoText.match(
+        /Showing\s+(\d+)\s+to\s+(\d+)\s+of\s+(\d+)/i
+    );
+    expect(match).toBeTruthy();
+    const from = Number(match[1]);
+    const to = Number(match[2]);
+    const total = Number(match[3]);
+
+    let rowCount = await PageManager.booksPage.tableRows.count();
+    if (rowCount === 1) {
+        const onlyRowText = (await PageManager.booksPage.tableRows.first().innerText()).trim();
+        if (/^No matching records found|^No data available/i.test(onlyRowText)) {
+            rowCount = 0;
+        }
+    }
+
+    const expectedOnPage = total === 0 ? 0 : to - from + 1;
+    expect(rowCount).toBe(expectedOnPage);
+    expect(rowCount).toBeLessThanOrEqual(total);
+});
